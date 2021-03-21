@@ -23,6 +23,9 @@ module JibunsekiBackend
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.generators do |g|
+      g.test_framework false
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -36,5 +39,8 @@ module JibunsekiBackend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
   end
 end
