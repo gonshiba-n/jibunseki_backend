@@ -8,11 +8,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: email_check }
   validates :password, length: { minimum: 6 }, on: :create
 
-  # トークン作成(英数+URLで使用可能な文字列の乱数生成)
-  def self.new_remember_token
-    SecureRandom.urlsafe_base64
-  end
-
   # 乱数を暗号化(ハッシュ値生成)
   def self.encrypt(token)
     Digest::SHA256.hexdigest(token.to_s)
