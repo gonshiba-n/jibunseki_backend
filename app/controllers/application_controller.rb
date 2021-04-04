@@ -17,7 +17,11 @@ class ApplicationController < ActionController::API
   end
 
   def logged_in?
-    @current_user.present?
+    if @current_user
+      render json: { logged_in: true, user: @current_user }
+    else
+      render json: { logged_in: false, message: "ユーザーが存在しません" }
+    end
   end
 
 end

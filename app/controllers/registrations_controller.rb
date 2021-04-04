@@ -5,7 +5,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       login(@user)
-      render json: {status: :created, user: @user}
+      render json: {status: :created, user: @current_user}
     else
       error_message = @user.errors.keys.map {|key| [key, @user.errors.full_messages_for(key)]}.to_h
       render json: {status: 500, message: error_message}
