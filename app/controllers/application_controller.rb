@@ -16,6 +16,11 @@ class ApplicationController < ActionController::API
     @current_user = user
   end
 
+  def logout
+    @current_user = nil
+    reset_session
+  end
+
   def logged_in?
     if @current_user
       render json: { logged_in: true, user: @current_user }
